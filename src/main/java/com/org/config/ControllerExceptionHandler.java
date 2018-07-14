@@ -21,5 +21,4 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 			errorInfo.setMessage(ex.getMessage());
 			return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(errorInfo);
 		}
-
 }

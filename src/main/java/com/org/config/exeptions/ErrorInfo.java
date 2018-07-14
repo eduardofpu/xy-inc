@@ -10,5 +10,4 @@ public class ErrorInfo {
     public void setMessage(String message) {
         this.message = message;
     }
-
 }
