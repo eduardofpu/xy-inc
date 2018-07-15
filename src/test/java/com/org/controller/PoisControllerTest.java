@@ -24,7 +24,7 @@ public class PoisControllerTest extends AbstractTest {
 
 	@Test
 	public void testfindAllPoisInterest() {
-		List<Pois> poisInterest = poiService.findAll();
+		List<Pois> poisInterest = (List<Pois>) poiService.findAll();
 		LOGGER.info("List all: ");
 		poisInterest.forEach(res -> {
 			LOGGER.info("Name: " + res.getName());

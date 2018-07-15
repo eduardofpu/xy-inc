@@ -1,6 +1,5 @@
 package com.org.service;
 
-import com.org.repository.PoisRepository;
 import com.org.config.exeptions.BusinessException;
 import com.org.model.Pois;
 import com.org.repository.PoisRepositoryPage;
@@ -22,23 +21,21 @@ import static java.lang.Math.sqrt;
 @Transactional
 public class PoisServiceIpml implements PoisService {
 
-    private PoisRepository poisRepository;
     private PoisRepositoryPage poisRepositoryPage;
 
     @Autowired
-    public PoisServiceIpml(PoisRepository poisRepository, PoisRepositoryPage poisRepositoryPage) {
-        this.poisRepository = poisRepository;
+    public PoisServiceIpml(PoisRepositoryPage poisRepositoryPage) {
         this.poisRepositoryPage = poisRepositoryPage;
     }
 
     @Override
-    public List<Pois> findAll() {
-        return poisRepository.findAll();
+    public Iterable<Pois> findAll() {
+        return poisRepositoryPage.findAll();
     }
 
     @GetMapping //http://localhost:8080/api/pois-interest/page?page=0&size=4
     public ResponseEntity<?> listAll(Pageable pageable) {
-        return new ResponseEntity<>(poisRepository.findAll(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(poisRepositoryPage.findAll(pageable), HttpStatus.OK);
     }
 
     @Override
@@ -47,7 +44,7 @@ public class PoisServiceIpml implements PoisService {
         if(poi.getCoordinatedX() < 0 || poi.getCoordinatedY() < 0) {
             throw new BusinessException("Unable to save (POIs) with negative coordinates");
         }
-        return new ResponseEntity<>( poisRepository.save(poi), HttpStatus.CREATED);
+        return new ResponseEntity<>( poisRepositoryPage.save(poi), HttpStatus.CREATED);
     }
 
     @Override
@@ -65,7 +62,7 @@ public class PoisServiceIpml implements PoisService {
     }
 
     private List<Pois> getPois(Integer coordinateReferenceX, Integer coordinateReferenceY, Integer distance) {
-        List<Pois> getPois = poisRepository.findAll();
+        List<Pois> getPois = (List<Pois>) poisRepositoryPage.findAll();
         return getPois.stream()
                 .filter(pois-> calcDistance(coordinateReferenceX, coordinateReferenceY, pois) < distance)
                 .collect(Collectors.toList());

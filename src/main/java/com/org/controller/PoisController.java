@@ -30,7 +30,7 @@ public class PoisController {
 
     @GetMapping(path = "/not-page")
     @ResponseBody
-    public List<Pois> findAll(){
+    public Iterable<Pois> findAll(){
         LOGGER.info("Search all (POIs).");
         return poiService.findAll();
     }
