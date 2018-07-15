@@ -56,7 +56,7 @@ public class PoisControllerTest extends AbstractTest {
 		LOGGER.info("Search by proximity: ");
 		poiService.nameProximityPois(coordenateX, coordenateY, distance)
                 .forEach(res -> {
-			    LOGGER.info("Nome: " + res);
+			    LOGGER.info("Name: " + res);
 		});
 
 		Assertions.assertThat(coordenateX).isEqualTo(20);
