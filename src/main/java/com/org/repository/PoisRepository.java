@@ -7,5 +7,4 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface PoisRepository extends JpaRepository<Pois, Long>{
-    List<Pois> findAll();
 }

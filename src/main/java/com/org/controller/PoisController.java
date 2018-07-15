@@ -5,6 +5,7 @@ import com.org.model.Pois;
 import com.org.service.PoisService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +28,18 @@ public class PoisController {
         this.poiService = poiService;
     }
 
-    @GetMapping()
+    @GetMapping(path = "/not-page")
     @ResponseBody
     public List<Pois> findAll(){
         LOGGER.info("Search all (POIs).");
         return poiService.findAll();
+    }
+
+    @GetMapping(path = "/page")
+    @ResponseBody
+    ResponseEntity<?> listAll(Pageable pageable){
+        LOGGER.info("Search all page(POIs).");
+        return poiService.listAll(pageable);
     }
 
     @PostMapping()

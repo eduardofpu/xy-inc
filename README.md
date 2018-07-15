@@ -49,14 +49,13 @@ $ mvn clean install
 $ mvn spring-boot:run 
 ```
 ## 3. Testando os serviços
-
 Realizar a chamada dos serviços. 
 Para testar os serviços utilize um browser ou o postman
 
 GET / - Lista todos os produtos de POIs 
 O Postman pode ser recomendado:
 ```sh
-$ curl http://localhost:8080/api/pois-interest
+$ curl http://localhost:8080/api/pois-interest/not-page
 [
   {
     "id": 1,
@@ -101,6 +100,47 @@ $ curl http://localhost:8080/api/pois-interest
     "coordinatedY": 2
   }
 ]
+```
+## 3.1. Pagination
+GET / - Lista todos os produtos de POIs  com paginação 
+```sh
+$ curl localhost:8080/api/pois-interest/page?page=0&size=4
+{
+    "content": [
+        {
+            "id": 1,
+            "name": "Lanchonete",
+            "coordinatedX": 27,
+            "coordinatedY": 12
+        },
+        {
+            "id": 2,
+            "name": "Posto",
+            "coordinatedX": 31,
+            "coordinatedY": 18
+        },
+        {
+            "id": 3,
+            "name": "Joalheria",
+            "coordinatedX": 15,
+            "coordinatedY": 12
+        },
+        {
+            "id": 4,
+            "name": "Floricultura",
+            "coordinatedX": 19,
+            "coordinatedY": 21
+        }
+    ],
+    "last": false,
+    "totalElements": 7,
+    "totalPages": 2,
+    "sort": null,
+    "first": true,
+    "numberOfElements": 4,
+    "size": 4,
+    "number": 0
+}
 ```
 
 GET - Busca todos os POIs com uma max-dist= 10

@@ -3,11 +3,14 @@ package com.org.service;
 import com.org.repository.PoisRepository;
 import com.org.config.exeptions.BusinessException;
 import com.org.model.Pois;
+import com.org.repository.PoisRepositoryPage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,16 +23,22 @@ import static java.lang.Math.sqrt;
 public class PoisServiceIpml implements PoisService {
 
     private PoisRepository poisRepository;
+    private PoisRepositoryPage poisRepositoryPage;
 
     @Autowired
-    public PoisServiceIpml(PoisRepository poisRepository) {
+    public PoisServiceIpml(PoisRepository poisRepository, PoisRepositoryPage poisRepositoryPage) {
         this.poisRepository = poisRepository;
+        this.poisRepositoryPage = poisRepositoryPage;
     }
 
     @Override
     public List<Pois> findAll() {
-
         return poisRepository.findAll();
+    }
+
+    @GetMapping //http://localhost:8080/api/pois-interest/page?page=0&size=4
+    public ResponseEntity<?> listAll(Pageable pageable) {
+        return new ResponseEntity<>(poisRepository.findAll(pageable), HttpStatus.OK);
     }
 
     @Override
