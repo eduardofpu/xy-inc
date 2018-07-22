@@ -55,7 +55,7 @@ public class PoisServiceIpml implements PoisService {
 
     @Override
     public List<String> nameProximityPoisQuery(Integer coordinateReferenceX, Integer coordinateReferenceY, Double distance) {
-        List<Pois> pois = poisRepository.distanciaPois(coordinateReferenceX,coordinateReferenceY,distance);
+        List<Pois> pois = poisRepository.distancePois(coordinateReferenceX,coordinateReferenceY,distance);
         return getNames(pois);
     }
 

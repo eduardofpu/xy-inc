@@ -12,10 +12,10 @@ import java.util.List;
 
 public interface PoisRepository extends JpaRepository<Pois, Long> {
 
-    String DISTANCIA = "select p from Pois p where sqrt(power(p.coordinatedX - :coordinateReferenceX,2) + power(p.coordinatedY - :coordinateReferenceY,2)) < :distance";
+    String DISTANCE = "select p from Pois p where sqrt(power(p.coordinatedX - :coordinateReferenceX,2) + power(p.coordinatedY - :coordinateReferenceY,2)) < :distance";
 
-    @Query(DISTANCIA)
-    List<Pois> distanciaPois(@Param("coordinateReferenceX") Integer coordinateReferenceX,
-                             @Param("coordinateReferenceY") Integer coordinateReferenceY,
-                             @Param("distance") Double distance);
+    @Query(DISTANCE)
+    List<Pois> distancePois(@Param("coordinateReferenceX") Integer coordinateReferenceX,
+                            @Param("coordinateReferenceY") Integer coordinateReferenceY,
+                            @Param("distance") Double distance);
 }
