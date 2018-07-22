@@ -17,13 +17,13 @@ import java.util.Optional;
 public class Pois {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @NotNull
     @NotBlank
     private String name;
     @NotNull
-    private int coordinatedX;
+    private Integer coordinatedX;
     @NotNull
-    private int coordinatedY;
+    private Integer coordinatedY;
 }

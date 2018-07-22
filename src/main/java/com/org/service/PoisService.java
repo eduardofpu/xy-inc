@@ -9,8 +9,9 @@ import java.util.List;
 
 public interface PoisService {
 
-    Iterable<Pois> findAll();
+    List<Pois> findAll();
     ResponseEntity<?> listAll(Pageable pageable);
     ResponseEntity<?> savePois(Pois poi) throws BusinessException;
-    List<String> nameProximityPois(Integer coordinateReferenceX, Integer coordinateReferenceY, Integer distance);
+    List<String> nameProximityPois(Integer coordinateReferenceX, Integer coordinateReferenceY, Double distance);
+    List<String> nameProximityPoisQuery(Integer coordinateReferenceX, Integer coordinateReferenceY, Double distance);
 }
