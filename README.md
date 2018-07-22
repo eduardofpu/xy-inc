@@ -143,10 +143,22 @@ $ curl localhost:8080/api/pois-interest/page?page=0&size=4
 }
 ```
 
-GET - Busca todos os POIs com uma max-dist= 10
+GET - Busca todos os POIs com uma max-dist= 10 ( Exemplo usando java )
 ```sh
 O Postman pode ser recomendado:
 $ curl http://localhost:8080/api/pois-interest/proximity?coordinateReferenceX=20&coordinateReferenceY=10&distance=10
+[
+  "Lanchonete",
+  "Joalheria",
+  "Pub",
+  "Supermercado"
+]
+```
+
+GET - Busca todos os POIs com uma max-dist= 10 ( Exemplo usando Query )
+```sh
+O Postman pode ser recomendado:
+$ curl http://localhost:8080/api/pois-interest/query?coordinateReferenceX=20&coordinateReferenceY=10&distance=10
 [
   "Lanchonete",
   "Joalheria",

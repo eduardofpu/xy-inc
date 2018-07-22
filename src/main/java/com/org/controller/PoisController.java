@@ -30,7 +30,7 @@ public class PoisController {
 
     @GetMapping(path = "/not-page")
     @ResponseBody
-    public Iterable<Pois> findAll(){
+    public List<Pois> findAll(){
         LOGGER.info("Search all (POIs).");
         return poiService.findAll();
     }
@@ -48,11 +48,19 @@ public class PoisController {
         return new ResponseEntity<>(poiService.savePois(pois), HttpStatus.CREATED).getBody();
     }
 
-    @GetMapping("/proximity")
+    @GetMapping(path = "/proximity")
     private List<String> findAllPois(@Valid @RequestParam("coordinateReferenceX") Integer coordinateReferenceX
             ,@Valid @RequestParam("coordinateReferenceY") Integer coordinateReferenceY
-            ,@Valid @RequestParam("distance")Integer distance) {
+            ,@Valid @RequestParam("distance")Double distance) {
         LOGGER.info("Search (POIs) for proximity.");
         return poiService.nameProximityPois(coordinateReferenceX, coordinateReferenceY, distance);
+    }
+
+    @GetMapping(path = "/query")
+    private List<String> findAllPoisQuery(@Valid @RequestParam("coordinateReferenceX") Integer coordinateReferenceX
+            ,@Valid @RequestParam("coordinateReferenceY") Integer coordinateReferenceY
+            ,@Valid @RequestParam("distance")Double distance) {
+        LOGGER.info("Search (POIs) for proximity.");
+        return poiService.nameProximityPoisQuery(coordinateReferenceX, coordinateReferenceY, distance);
     }
 }

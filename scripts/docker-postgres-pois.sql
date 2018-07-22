@@ -7,8 +7,8 @@ CREATE TABLE PUBLIC.tb_pois_interest
 (
     id BIGSERIAL    NOT NULL CONSTRAINT pois_pkey PRIMARY KEY,
     name varchar(45) NOT NULL,
-	coordinatedx int NOT NULL,
-	coordinatedy int NOT NULL
+	coordinatedx Integer NOT NULL,
+	coordinatedy Integer NOT NULL
 	);
 CREATE INDEX tb_pois_interest_id_idx
   ON PUBLIC.tb_pois_interest (id);

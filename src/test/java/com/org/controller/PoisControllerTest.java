@@ -24,7 +24,7 @@ public class PoisControllerTest extends AbstractTest {
 
 	@Test
 	public void testfindAllPoisInterest() {
-		List<Pois> poisInterest = (List<Pois>) poiService.findAll();
+		List<Pois> poisInterest =  poiService.findAll();
 		LOGGER.info("List all: ");
 		poisInterest.forEach(res -> {
 			LOGGER.info("Name: " + res.getName());
@@ -52,7 +52,7 @@ public class PoisControllerTest extends AbstractTest {
 	public void findPoisInterestFoProximity() {
 		Integer coordenateX = 20;
 		Integer coordenateY = 10;
-		Integer distance = 10;
+		Double distance = 10.0;
 		LOGGER.info("Search by proximity: ");
 		poiService.nameProximityPois(coordenateX, coordenateY, distance)
                 .forEach(res -> {
@@ -61,6 +61,22 @@ public class PoisControllerTest extends AbstractTest {
 
 		Assertions.assertThat(coordenateX).isEqualTo(20);
 		Assertions.assertThat(coordenateY).isEqualTo(10);
-		Assertions.assertThat(distance).isEqualTo(10);
+		Assertions.assertThat(distance).isEqualTo(10.0);
+	}
+
+	@Test
+	public void findPoisInterestFoProximityQuery() {
+		Integer coordenateX = 20;
+		Integer coordenateY = 10;
+		Double distance = 10.0;
+		LOGGER.info("Search by proximity: ");
+		poiService.nameProximityPoisQuery(coordenateX, coordenateY, distance)
+				.forEach(res -> {
+					LOGGER.info("Name: " + res);
+				});
+
+		Assertions.assertThat(coordenateX).isEqualTo(20);
+		Assertions.assertThat(coordenateY).isEqualTo(10);
+		Assertions.assertThat(distance).isEqualTo(10.0);
 	}
 }
