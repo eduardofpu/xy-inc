@@ -32,7 +32,7 @@ public class PoiControllerTest {
         this.mockMvc.perform(
                 get("/pois"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("dsa", Matchers.is(7)))
+                .andExpect(jsonPath("totalElements", Matchers.is(7)))
         ;
     }
 
