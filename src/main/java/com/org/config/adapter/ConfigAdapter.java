@@ -15,7 +15,7 @@ public class ConfigAdapter extends WebMvcConfigurerAdapter {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 
         PageableHandlerMethodArgumentResolver pageResolver = new PageableHandlerMethodArgumentResolver();
-        pageResolver.setFallbackPageable(new PageRequest(0,5));
+        pageResolver.setFallbackPageable(new PageRequest(0,10));
         argumentResolvers.add(pageResolver);
     }
 }

@@ -1,4 +1,4 @@
-package com.org.config.exeptions;
+package com.org.config.exception;
 public class BusinessException extends Exception {
 
     private static final long serialVersionUID = 1L;
