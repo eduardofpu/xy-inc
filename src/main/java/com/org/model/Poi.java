@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 public class Poi {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     @NotBlank
