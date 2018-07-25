@@ -2,7 +2,6 @@ package com.org.controller;
 
 import com.org.Application;
 import org.hamcrest.Matchers;
-import org.hamcrest.core.Is;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +30,10 @@ public class PoiControllerTest {
     @Test
     public void findAllControllerTest() throws Exception {
         this.mockMvc.perform(
-                get(PATH))
+                get("/pois"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("totalElements"), Matchers.is(7));
+                .andExpect(jsonPath("dsa", Matchers.is(7)))
+        ;
     }
 
 }
