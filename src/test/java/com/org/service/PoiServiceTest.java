@@ -14,11 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.logging.Logger;
+import java.util.List;
 
 import static java.lang.String.valueOf;
 
@@ -54,21 +53,19 @@ public class PoiServiceTest {
     }
 
     @Test
-    public void  searchByDistance(){
-
-        Page<PoiRepresentation> poiRepresentations = service.searchByDistance(new PageRequest(0, 100), 20, 10, 10.0);
+    public void searchByDistance(){
+        Page<PoiRepresentation> poiRepresentations = service.searchByDistance(new PageRequest(0, 10), 20, 10, 10.0);
 
         Poi poiTotalElements = repository.findOne(poiRepresentations.getTotalElements());
-        Assertions.assertThat(poiTotalElements).isNotNull();
         Assertions.assertThat(poiTotalElements.getId()).isNotNull();
 
-        Poi poiTotalElements2 = repository.findOne(poiRepresentations.getTotalElements());
-
-        Assertions.assertThat(poiTotalElements.getId()).isEqualTo(poiRepresentations.getTotalElements());
-        Assertions.assertThat(poiTotalElements.getName()).isEqualTo(poiTotalElements2.getName());
-        Assertions.assertThat(poiTotalElements.getCoordinatedX()).isEqualTo(poiTotalElements2.getCoordinatedX());
-        Assertions.assertThat(poiTotalElements.getCoordinatedY()).isEqualTo(poiTotalElements2.getCoordinatedY());
+        List<PoiRepresentation> content = poiRepresentations.getContent();
+        int totalElements = (int) poiRepresentations.getTotalElements();
+        int totalPages = poiRepresentations.getTotalPages();
 
 
+        Assertions.assertThat(content.size()).isEqualTo(totalElements);
+        Assertions.assertThat(totalPages).isEqualTo(1);
+        Assertions.assertThat(poiRepresentations.getSize()).isEqualTo(10);
     }
 }
