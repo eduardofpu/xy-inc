@@ -94,7 +94,7 @@ public class PoiValidatorTest {
         validator.validate(poi.getCoordinatedX(), poi.getCoordinatedY());
     }
 
-    public static Poi create(String name,
+    private Poi create(String name,
                              Integer coordinatedX,
                              Integer coordinatedY,
                              PoiRepository repository,
@@ -104,5 +104,4 @@ public class PoiValidatorTest {
         Poi poi = new Poi(name, coordinatedX, coordinatedY);
         return repository.save(poi);
     }
-
 }
