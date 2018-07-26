@@ -2,7 +2,7 @@ package com.org.config;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.org.config.exeptions.ErrorInfo;
+import com.org.config.exception.ErrorInfo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

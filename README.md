@@ -55,7 +55,7 @@ Para testar os serviços utilize um browser ou o postman
 GET / - Lista todos os produtos de POIs 
 O Postman pode ser recomendado:
 ```sh
-$ curl http://localhost:8080/api/pois-interest/not-page
+$ curl http://localhost:8080/api/poi-interest/not-page
 [
   {
     "id": 1,
@@ -104,7 +104,7 @@ $ curl http://localhost:8080/api/pois-interest/not-page
 ## 3.1. Pagination
 GET / - Lista todos os produtos de POIs  com paginação 
 ```sh
-$ curl localhost:8080/api/pois-interest/page?page=0&size=4
+$ curl localhost:8080/api/poi-interest/page?page=0&size=4
 {
     "content": [
         {
@@ -146,7 +146,7 @@ $ curl localhost:8080/api/pois-interest/page?page=0&size=4
 GET - Busca todos os POIs com uma max-dist= 10 ( Exemplo usando java )
 ```sh
 O Postman pode ser recomendado:
-$ curl http://localhost:8080/api/pois-interest/proximity?coordinateReferenceX=20&coordinateReferenceY=10&distance=10
+$ curl http://localhost:8080/api/poi-interest/proximity?coordinateReferenceX=20&coordinateReferenceY=10&distance=10
 [
   "Lanchonete",
   "Joalheria",
@@ -158,7 +158,7 @@ $ curl http://localhost:8080/api/pois-interest/proximity?coordinateReferenceX=20
 GET - Busca todos os POIs com uma max-dist= 10 ( Exemplo usando Query )
 ```sh
 O Postman pode ser recomendado:
-$ curl http://localhost:8080/api/pois-interest/query?coordinateReferenceX=20&coordinateReferenceY=10&distance=10
+$ curl http://localhost:8080/api/poi-interest/query?coordinateReferenceX=20&coordinateReferenceY=10&distance=10
 [
   "Lanchonete",
   "Joalheria",
@@ -172,7 +172,7 @@ O Postman pode ser recomendado:
 ```sh
 $ curl -H "Content-Type: application/json" -X POST -d '
 
-http://localhost:8080/api/pois-interest 
+http://localhost:8080/api/poi-interest 
 
 {  
   "name": "ZupTI",

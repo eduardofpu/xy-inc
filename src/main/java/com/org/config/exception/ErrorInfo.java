@@ -1,4 +1,4 @@
-package com.org.config.exeptions;
+package com.org.config.exception;
 
 public class ErrorInfo {
 

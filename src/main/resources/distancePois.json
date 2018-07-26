@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Lanchonete",
+    "coordinatedX": 27,
+    "coordinatedY": 12
+  },
+  {
+    "id": 3,
+    "name": "Joalheria",
+    "coordinatedX": 15,
+    "coordinatedY": 12
+  },
+  {
+    "id": 5,
+    "name": "Pub",
+    "coordinatedX": 12,
+    "coordinatedY": 8
+  },
+  {
+    "id": 6,
+    "name": "Supermercado",
+    "coordinatedX": 23,
+    "coordinatedY": 6
+  }
+]
