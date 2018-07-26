@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Transactional
 public class PoiTest {
 
     @Autowired

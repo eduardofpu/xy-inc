@@ -19,11 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static java.lang.String.valueOf;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Transactional
 public class PoiServiceTest {
 
     @Autowired
@@ -54,18 +51,18 @@ public class PoiServiceTest {
 
     @Test
     public void searchByDistance(){
-        Page<PoiRepresentation> poiRepresentations = service.searchByDistance(new PageRequest(0, 10), 20, 10, 10.0);
-
-        Poi poiTotalElements = repository.findOne(poiRepresentations.getTotalElements());
-        Assertions.assertThat(poiTotalElements.getId()).isNotNull();
+        Page<PoiRepresentation> poiRepresentations = service.searchByDistance(new PageRequest(0, 100), 20, 10, 10.0);
 
         List<PoiRepresentation> content = poiRepresentations.getContent();
         int totalElements = (int) poiRepresentations.getTotalElements();
-        int totalPages = poiRepresentations.getTotalPages();
 
+        Poi poiTotalElements = repository.findOne(poiRepresentations.getTotalElements());
+        Assertions.assertThat(poiTotalElements.getId()).isNotNull();
+        Assertions.assertThat(poiTotalElements.getName()).isNotNull();
+        Assertions.assertThat(poiTotalElements.getCoordinatedX()).isNotNull();
+        Assertions.assertThat(poiTotalElements.getCoordinatedY()).isNotNull();
 
         Assertions.assertThat(content.size()).isEqualTo(totalElements);
-        Assertions.assertThat(totalPages).isEqualTo(1);
-        Assertions.assertThat(poiRepresentations.getSize()).isEqualTo(10);
+        Assertions.assertThat(poiRepresentations.getSize()).isEqualTo(100);
     }
 }
