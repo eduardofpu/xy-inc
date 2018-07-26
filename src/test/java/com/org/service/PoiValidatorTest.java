@@ -34,24 +34,63 @@ public class PoiValidatorTest {
         Assertions.assertThat(poi.getCoordinatedY()).isEqualTo(10);
     }
 
-    @Test(expected=BusinessException.class)
-    public void validatorLessZero() throws BusinessException {
+    @Test
+    public void validatorCoordinatedZero() throws BusinessException {
 
-        Poi poi = new Poi("Cemig",-20,10);
+        Poi poi = new Poi("Camaru",0,0);
+        create(poi.getName(),poi.getCoordinatedX(),poi.getCoordinatedY(),repository, validator);
+        Assertions.assertThat(poi.getName()).isEqualTo("Camaru");
+        Assertions.assertThat(poi.getCoordinatedX()).isEqualTo(0);
+        Assertions.assertThat(poi.getCoordinatedY()).isEqualTo(0);
+    }
+
+    @Test
+    public void validatorCoordinatedXZero() throws BusinessException {
+
+        Poi poi = new Poi("Droga Lider",0,10);
+        create(poi.getName(),poi.getCoordinatedX(),poi.getCoordinatedY(),repository, validator);
+        Assertions.assertThat(poi.getName()).isEqualTo("Droga Lider");
+        Assertions.assertThat(poi.getCoordinatedX()).isEqualTo(0);
+        Assertions.assertThat(poi.getCoordinatedY()).isEqualTo(10);
+    }
+
+    @Test
+    public void validatorCoordinatedYZero() throws BusinessException {
+
+        Poi poi = new Poi("Loja do Açai",50,0);
+        create(poi.getName(),poi.getCoordinatedX(),poi.getCoordinatedY(),repository, validator);
+        Assertions.assertThat(poi.getName()).isEqualTo("Loja do Açai");
+        Assertions.assertThat(poi.getCoordinatedX()).isEqualTo(50);
+        Assertions.assertThat(poi.getCoordinatedY()).isEqualTo(0);
+    }
+
+
+    @Test(expected=BusinessException.class)
+    public void validatetorNotCreate() throws BusinessException {
+
+        Poi poi = new Poi("Ufu",-20,-10);
+        create(poi.getName(),poi.getCoordinatedX(),poi.getCoordinatedY(),repository, validator);
+
+    }
+
+    @Test(expected=BusinessException.class)
+    public void validateIfLessThanZero() throws BusinessException {
+
+        Poi poi = new Poi("Cemig",-1,-2);
         validator.validate(poi.getCoordinatedX(), poi.getCoordinatedY());
     }
 
     @Test(expected=BusinessException.class)
-    public void validatorCoodinatedXLessZero() throws BusinessException {
+    public void validateIfCoordinatedXLessThanZero() throws BusinessException {
 
-        Poi poi = new Poi("Cemig",-20,-10);
+        Poi poi = new Poi("Cemig",-4,0);
         validator.validate(poi.getCoordinatedX(), poi.getCoordinatedY());
     }
 
     @Test(expected=BusinessException.class)
-    public void validatorCoodinatedYLessZero() throws BusinessException {
+    public void validateIfCoordinatedYLessThanZero() throws BusinessException {
 
-        Poi poi = new Poi("Cemig",20,-10);
+        Poi poi = new Poi("Cemig",0,-3);
         validator.validate(poi.getCoordinatedX(), poi.getCoordinatedY());
     }
 
