@@ -1,37 +1,42 @@
 package com.org.model;
 
+import com.org.Application;
+import com.org.config.exception.BusinessException;
+import com.org.repository.PoiRepository;
+import com.org.service.PoiValidator;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
-
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Transactional
 public class PoiTest {
 
-    @Test
-    public void findAll(){
-        List<Poi> pois = listPois();
-        Assertions.assertThat(pois.size()).isNotNull();
-    }
+    @Autowired
+    private PoiValidator validator;
+
+    @Autowired
+    private PoiRepository repository;
+
 
     @Test
-    public void create(){
-        Poi poi = new Poi( "Farmácia",   47, 14);
+    public void create() throws BusinessException {
 
-        Assertions.assertThat(poi.getName()).isEqualTo("Farmácia");
-        Assertions.assertThat(poi.getCoordinatedX()).isEqualTo(47);
-        Assertions.assertThat(poi.getCoordinatedY()).isEqualTo(14);
+        Poi poi = Poi.create("Shop", 20, 10, repository, validator);
+
+        Poi poiCreated = repository.findOne(poi.getId());
+        Assertions.assertThat(poiCreated.getId()).isNotNull();
+        Assertions.assertThat(poiCreated.getId()).isEqualTo(poi.getId());
+        Assertions.assertThat(poiCreated.getName()).isEqualTo(poi.getName());
+        Assertions.assertThat(poiCreated.getCoordinatedX()).isEqualTo(poi.getCoordinatedX());
+        Assertions.assertThat(poiCreated.getCoordinatedY()).isEqualTo(poi.getCoordinatedY());
     }
-
-    private List<Poi> listPois(){
-        Poi p1 = new Poi(1L, "Lanchonete",   27, 12);
-        Poi p2 = new Poi(2L, "Posto",        31, 18);
-        Poi p3 = new Poi(3L, "Joalheria",    15, 12);
-        Poi p4 = new Poi(4L, "Floricultura", 19, 21);
-        Poi p5 = new Poi(5L, "Pub",          12, 8);
-        Poi p6 = new Poi(6L, "Supermecado",  23, 6);
-        Poi p7 = new Poi(7L, "Churrascaria", 28, 2);
-        return Arrays.asList(p1, p2, p3, p4, p5, p6, p7);
-    }
-
 }
