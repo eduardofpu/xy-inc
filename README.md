@@ -52,59 +52,10 @@ $ mvn spring-boot:run
 Realizar a chamada dos serviços. 
 Para testar os serviços utilize um browser ou o postman
 
-GET / - Lista todos os produtos de POIs 
-O Postman pode ser recomendado:
-```sh
-$ curl http://localhost:8080/api/poi-interest/not-page
-[
-  {
-    "id": 1,
-    "name": "Lanchonete",
-    "coordinatedX": 27,
-    "coordinatedY": 12
-  },
-  {
-    "id": 2,
-    "name": "Posto",
-    "coordinatedX": 31,
-    "coordinatedY": 18
-  },
-  {
-    "id": 3,
-    "name": "Joalheria",
-    "coordinatedX": 15,
-    "coordinatedY": 12
-  },
-  {
-    "id": 4,
-    "name": "Floricultura",
-    "coordinatedX": 19,
-    "coordinatedY": 21
-  },
-  {
-    "id": 5,
-    "name": "Pub",
-    "coordinatedX": 12,
-    "coordinatedY": 8
-  },
-  {
-    "id": 6,
-    "name": "Supermercado",
-    "coordinatedX": 23,
-    "coordinatedY": 6
-  },
-  {
-    "id": 7,
-    "name": "Churrascaria",
-    "coordinatedX": 28,
-    "coordinatedY": 2
-  }
-]
-```
-## 3.1. Pagination
+
 GET / - Lista todos os produtos de POIs  com paginação 
 ```sh
-$ curl localhost:8080/api/poi-interest/page?page=0&size=4
+$ curl localhost:8080/pois?page=0&size=4
 {
     "content": [
         {
@@ -146,7 +97,7 @@ $ curl localhost:8080/api/poi-interest/page?page=0&size=4
 GET - Busca todos os POIs com uma max-dist= 10 ( Exemplo usando java )
 ```sh
 O Postman pode ser recomendado:
-$ curl http://localhost:8080/api/poi-interest/proximity?coordinateReferenceX=20&coordinateReferenceY=10&distance=10
+$ curl http://localhost:8080/pois/distance?coordinateReferenceX=20&coordinateReferenceY=10&distance=10
 [
   "Lanchonete",
   "Joalheria",
@@ -172,7 +123,7 @@ O Postman pode ser recomendado:
 ```sh
 $ curl -H "Content-Type: application/json" -X POST -d '
 
-http://localhost:8080/api/poi-interest 
+http://localhost:8080/pois
 
 {  
   "name": "ZupTI",
