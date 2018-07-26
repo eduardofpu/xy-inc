@@ -94,28 +94,46 @@ $ curl localhost:8080/pois?page=0&size=4
 }
 ```
 
-GET - Busca todos os POIs com uma max-dist= 10 ( Exemplo usando java )
+GET - Busca todos os POIs com uma max-dist= 10 
 ```sh
 O Postman pode ser recomendado:
 $ curl http://localhost:8080/pois/distance?coordinateReferenceX=20&coordinateReferenceY=10&distance=10
-[
-  "Lanchonete",
-  "Joalheria",
-  "Pub",
-  "Supermercado"
-]
-```
-
-GET - Busca todos os POIs com uma max-dist= 10 ( Exemplo usando Query )
-```sh
-O Postman pode ser recomendado:
-$ curl http://localhost:8080/api/poi-interest/query?coordinateReferenceX=20&coordinateReferenceY=10&distance=10
-[
-  "Lanchonete",
-  "Joalheria",
-  "Pub",
-  "Supermercado"
-]
+{
+    "content": [
+        {
+            "id": 1,
+            "name": "Lanchonete",
+            "coordinatedX": 27,
+            "coordinatedY": 12
+        },
+        {
+            "id": 3,
+            "name": "Joalheria",
+            "coordinatedX": 15,
+            "coordinatedY": 12
+        },
+        {
+            "id": 5,
+            "name": "Pub",
+            "coordinatedX": 12,
+            "coordinatedY": 8
+        },
+        {
+            "id": 6,
+            "name": "Supermercado",
+            "coordinatedX": 23,
+            "coordinatedY": 6
+        }
+    ],
+    "last": true,
+    "totalPages": 1,
+    "totalElements": 4,
+    "sort": null,
+    "first": true,
+    "numberOfElements": 4,
+    "size": 10,
+    "number": 0
+}
 ```
 
 POST - Cria um novo POIs 
