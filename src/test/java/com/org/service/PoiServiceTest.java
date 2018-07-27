@@ -56,10 +56,14 @@ public class PoiServiceTest {
         int totalElements = (int) poiRepresentations.getTotalElements();
 
         List<String> namesContent = getNameContent(poiRepresentations);
+        System.out.println("Content---"+namesContent);
+
         List<String> namesPois = getNamesPois();
+        System.out.println("Pois---"+namesPois);
 
 
         List<String> namesContentPois = comparatorNamesContentEqualsNamesPois(namesContent, namesPois);
+        System.out.println("ContentPois---"+namesContentPois);
 
         Assertions.assertThat(namesContent).isEqualTo(namesContentPois);
         Assertions.assertThat(namesContent.size()).isEqualTo(totalElements);
