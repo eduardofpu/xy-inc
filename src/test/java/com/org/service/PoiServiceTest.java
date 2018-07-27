@@ -53,14 +53,15 @@ public class PoiServiceTest extends AbstractTest {
         int totalElements = (int) poiRepresentations.getTotalElements();
 
         List<Long> namesContent = getNameContent(poiRepresentations);
-        System.out.println("Content---"+namesContent);
+        System.out.println("Content---" + namesContent);
 
         List<Long> namesPois = getNamesPois();
-        System.out.println("Pois---"+namesPois);
+        System.out.println("Pois---" + namesPois);
 
 
         List<Long> namesContentPois = comparatorNamesContentEqualsNamesPois(namesContent, namesPois);
-        System.out.println("ContentPois---"+namesContentPois);
+        System.out.println("ContentPois---" + namesContentPois);
+
 
         Assertions.assertThat(namesContent).isEqualTo(namesContentPois);
         Assertions.assertThat(namesContent.size()).isEqualTo(totalElements);
@@ -86,7 +87,9 @@ public class PoiServiceTest extends AbstractTest {
         for (Long content : namesContent) {
             for (Long pois : namesPois) {
                 if (content == pois) {
-                   return namesContent;
+                    return namesContent;
+                } else {
+                    return namesPois;
                 }
             }
         }
