@@ -16,7 +16,6 @@ public class PoiTest extends AbstractTest{
     @Autowired
     private PoiRepository repository;
 
-
     @Test
     public void create() throws BusinessException {
 

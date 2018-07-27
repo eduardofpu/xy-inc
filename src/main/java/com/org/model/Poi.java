@@ -8,11 +8,13 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Entity
+@EqualsAndHashCode
 public class Poi {
 
     @Id

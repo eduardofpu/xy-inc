@@ -1,4 +1,4 @@
-# Distancia
+# Descrição do problema 
 
 ```sh
 A XY Inc. é uma empresa especializada na produção de excelentes receptores GPS (Global Positioning System). A diretoria está empenhada em lançar um dispositivo inovador que promete auxiliar pessoas na localização de ponto de interesse (POIs), e precisa muito de sua ajuda. 
@@ -30,12 +30,13 @@ Pub
 Supermercado
 ```
  
-## 1. Requisitos 
+## 1. Dependências
 
 Instalar as seguintes ferramentas:
 
     1. JDK 1.8
-    3. Maven
+    2. Maven
+    3. Docker compose
     
 O projeto utiliza um banco embarcado (Postgres) para desenvolvimento.
  

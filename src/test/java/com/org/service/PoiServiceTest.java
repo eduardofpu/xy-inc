@@ -8,15 +8,15 @@ import com.org.representation.IdRepresentation;
 import com.org.representation.PoiRepresentation;
 import com.org.request.PoiRequest;
 import org.assertj.core.api.Assertions;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PoiServiceTest extends AbstractTest {
@@ -49,50 +49,20 @@ public class PoiServiceTest extends AbstractTest {
 
     @Test
     public void searchByDistance() {
-        Page<PoiRepresentation> poiRepresentations = service.searchByDistance(new PageRequest(0, 100), 20, 10, 10.0);
-        int totalElements = (int) poiRepresentations.getTotalElements();
+        Page<PoiRepresentation> poiPage = service.searchByDistance(new PageRequest(0, 100), 20, 10, 6.0);
+        List<PoiRepresentation> content = poiPage.getContent();
 
-        List<Long> namesContent = getNameContent(poiRepresentations);
-        System.out.println("Content---" + namesContent);
+        Assertions.assertThat(poiPage.getTotalElements()).isEqualTo(2);
 
-        List<Long> namesPois = getNamesPois();
-        System.out.println("Pois---" + namesPois);
+        Optional<PoiRepresentation> firstResult = content.stream()
+                .filter(poi -> poi.getId().equals(3L))
+                .findFirst();
 
+        Optional<PoiRepresentation> secondResult = content.stream()
+                .filter(poi -> poi.getId().equals(6L))
+                .findFirst();
 
-        List<Long> namesContentPois = comparatorNamesContentEqualsNamesPois(namesContent, namesPois);
-        System.out.println("ContentPois---" + namesContentPois);
-
-
-        Assertions.assertThat(namesContent).isEqualTo(namesContentPois);
-        Assertions.assertThat(namesContent.size()).isEqualTo(totalElements);
-        Assertions.assertThat(poiRepresentations.getSize()).isEqualTo(100);
-    }
-
-    private List<Long> getNamesPois() {
-        List<Poi> pois = repository.findAll();
-        return pois.stream()
-                .map(Poi::getId)
-                .collect(Collectors.toList());
-    }
-
-    private List<Long> getNameContent(Page<PoiRepresentation> poiRepresentations) {
-        List<PoiRepresentation> content = poiRepresentations.getContent();
-        return content.stream()
-                .map(PoiRepresentation::getId)
-                .collect(Collectors.toList());
-    }
-
-    private List<Long> comparatorNamesContentEqualsNamesPois(List<Long> namesContent, List<Long> namesPois) {
-
-        for (Long content : namesContent) {
-            for (Long pois : namesPois) {
-                if (content == pois) {
-                    return namesContent;
-                } else {
-                    return namesPois;
-                }
-            }
-        }
-        return namesPois;
+        Assert.assertNotNull(firstResult);
+        Assert.assertNotNull(secondResult);
     }
 }
