@@ -1,23 +1,14 @@
 package com.org.model;
 
-import com.org.Application;
+import com.org.AbstractTest;
 import com.org.config.exception.BusinessException;
 import com.org.repository.PoiRepository;
 import com.org.service.PoiValidator;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.List;
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class PoiTest {
+public class PoiTest extends AbstractTest{
 
     @Autowired
     private PoiValidator validator;

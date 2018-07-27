@@ -1,6 +1,6 @@
 package com.org.service;
 
-import com.org.Application;
+import com.org.AbstractTest;
 import com.org.config.exception.BusinessException;
 import com.org.model.Poi;
 import com.org.repository.PoiRepository;
@@ -9,20 +9,14 @@ import com.org.representation.PoiRepresentation;
 import com.org.request.PoiRequest;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class PoiServiceTest {
+public class PoiServiceTest extends AbstractTest {
 
     @Autowired
     private PoiService service;
