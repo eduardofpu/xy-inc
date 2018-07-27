@@ -15,9 +15,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -50,19 +51,44 @@ public class PoiServiceTest {
     }
 
     @Test
-    public void searchByDistance(){
+    public void searchByDistance() {
         Page<PoiRepresentation> poiRepresentations = service.searchByDistance(new PageRequest(0, 100), 20, 10, 10.0);
-
-        List<PoiRepresentation> content = poiRepresentations.getContent();
         int totalElements = (int) poiRepresentations.getTotalElements();
 
-        Poi poiTotalElements = repository.findOne(poiRepresentations.getTotalElements());
-        Assertions.assertThat(poiTotalElements.getId()).isNotNull();
-        Assertions.assertThat(poiTotalElements.getName()).isNotNull();
-        Assertions.assertThat(poiTotalElements.getCoordinatedX()).isNotNull();
-        Assertions.assertThat(poiTotalElements.getCoordinatedY()).isNotNull();
+        List<String> namesContent = getNameContent(poiRepresentations);
+        List<String> namesPois = getNamesPois();
 
-        Assertions.assertThat(content.size()).isEqualTo(totalElements);
+
+        List<String> namesContentPois = comparatorNamesContentEqualsNamesPois(namesContent, namesPois);
+
+        Assertions.assertThat(namesContent).isEqualTo(namesContentPois);
+        Assertions.assertThat(namesContent.size()).isEqualTo(totalElements);
         Assertions.assertThat(poiRepresentations.getSize()).isEqualTo(100);
+    }
+
+    private List<String> getNamesPois() {
+        List<Poi> pois = repository.findAll();
+        return pois.stream()
+                .map(Poi::getName)
+                .collect(Collectors.toList());
+    }
+
+    private List<String> getNameContent(Page<PoiRepresentation> poiRepresentations) {
+        List<PoiRepresentation> content = poiRepresentations.getContent();
+        return content.stream()
+                .map(PoiRepresentation::getName)
+                .collect(Collectors.toList());
+    }
+
+    private List<String> comparatorNamesContentEqualsNamesPois(List<String> names, List<String> names2) {
+
+        for (String n1 : names) {
+            for (String n2 : names2) {
+                if (n1.equals(n2)) {
+                    return names;
+                }
+            }
+        }
+        return names2;
     }
 }
