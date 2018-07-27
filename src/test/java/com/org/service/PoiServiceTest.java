@@ -84,15 +84,15 @@ public class PoiServiceTest {
                 .collect(Collectors.toList());
     }
 
-    private List<String> comparatorNamesContentEqualsNamesPois(List<String> names, List<String> names2) {
+    private List<String> comparatorNamesContentEqualsNamesPois(List<String> namesContent, List<String> namesPois) {
 
-        for (String n1 : names) {
-            for (String n2 : names2) {
-                if (n1.equals(n2)) {
-                    return names;
+        for (String content : namesContent) {
+            for (String pois : namesPois) {
+                if (content.equals(pois)) {
+                    return namesContent;
                 }
             }
         }
-        return names2;
+        return namesPois;
     }
 }
